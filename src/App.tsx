@@ -1,27 +1,13 @@
 import Navigation from "./components/sections/Navigation";
-import HeroSection from "./components/sections/HeroSection";
-import CertificationSection from "./components/sections/CertificationSection";
-import ClientsSection from "./components/sections/ClientsSection";
-import ServicesSection from "./components/sections/ServicesSection";
-import ContactSection from "./components/sections/ContactSection";
 import Footer from "./components/sections/Footer";
+import HomeSection from "./components/sections/homesection";
 
 function App() {
   return (
     <div>
 
       <Navigation />
-
-      <HeroSection />
-
-      <CertificationSection />
-
-      <ClientsSection />
-
-      <ServicesSection />
-
-      {/* <ContactSection /> */}
-
+      <HomeSection /> 
       <Footer />
 
     </div>
