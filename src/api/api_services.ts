@@ -58,9 +58,10 @@ export const getHomePageData = async () => {
 
     homeSections:
       data?.HomePage?.map((item: any) => {
-        const sectionImage =
+        const mediaUrl =
           item?.image?.formats?.large?.url ||
           item?.image?.formats?.medium?.url ||
+          item?.image?.formats?.small?.url ||
           item?.image?.url ||
           "";
 
@@ -68,11 +69,12 @@ export const getHomePageData = async () => {
           id: item?.id,
           title: item?.title?.trim(),
           description: item?.description || [],
-          image: getMediaUrl(sectionImage),
+          media: getMediaUrl(mediaUrl),
+          mime: item?.image?.mime || "",
         };
       }) || [],
 
-      // ─── ISO Certificates ────────────────────────────────────
+    // ─── ISO Certificates ────────────────────────────────────
 
     isoCertificates:
       data?.IOS_Certificates?.map((item: any) => {

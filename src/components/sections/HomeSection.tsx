@@ -71,8 +71,11 @@ const renderRichText = (blocks: RichTextBlock[]): React.ReactNode => {
 // ─── Component ─────────────────────────────────────────────────────────────
 
 export default function HomeSection() {
-  const [homeData, setHomeData] = useState<HomePageData | null>(null);
-  const [heroBgLoaded, setHeroBgLoaded] = useState(false);
+  const [homeData, setHomeData] =
+    useState<HomePageData | null>(null);
+
+  const [heroBgLoaded, setHeroBgLoaded] =
+    useState(false);
 
   useEffect(() => {
     getHomePageData()
@@ -81,6 +84,7 @@ export default function HomeSection() {
 
         if (data?.heroImage) {
           const img = new Image();
+
           img.src = data.heroImage;
 
           img.onload = () => setHeroBgLoaded(true);
@@ -94,11 +98,16 @@ export default function HomeSection() {
         }
       })
       .catch((err) => {
-        console.error("Failed to fetch home page data:", err);
+        console.error(
+          "Failed to fetch home page data:",
+          err
+        );
       });
   }, []);
 
-  const clients: ClientLogo[] = homeData?.clientLogos ?? [];
+  const clients: ClientLogo[] =
+    homeData?.clientLogos ?? [];
+
   const isoCertificates: IsoCertificate[] =
     homeData?.isoCertificates ?? [];
 
@@ -143,36 +152,16 @@ export default function HomeSection() {
       <section className="bg-gray-100 py-4 px-4">
         <div className="flex items-center justify-center gap-10 flex-wrap">
 
-          {/* {isoCertificates.length > 0 ? (
-            isoCertificates.map((item: IsoCertificate) => (
+          {isoCertificates.map(
+            (item: IsoCertificate) => (
               <img
                 key={item.id}
                 src={item.isoLogo}
                 alt="ISO Certification"
                 className="w-24 md:w-28 object-contain"
-                onError={(e) => {
-                  (
-                    e.currentTarget as HTMLImageElement
-                  ).style.display = "none";
-                }}
               />
-            ))
-          ) : (
-            Array.from({ length: 3 }).map((_, i) => (
-              <div
-                key={i}
-                className="w-24 h-24 bg-gray-200 animate-pulse rounded"
-              />
-            ))
-          )} */}
-          {isoCertificates.map((item: IsoCertificate) => (
-            <img
-              key={item.id}
-              src={item.isoLogo}
-              alt="ISO Certification"
-              className="w-24 md:w-28 object-contain"
-            />
-          ))}
+            )
+          )}
 
         </div>
       </section>
@@ -186,7 +175,10 @@ export default function HomeSection() {
             <div className="flex items-center animate-marquee gap-20 w-max">
 
               {[...clients, ...clients].map(
-                (client: ClientLogo, index: number) => (
+                (
+                  client: ClientLogo,
+                  index: number
+                ) => (
                   <div
                     key={index}
                     className="flex items-center justify-center"
@@ -231,7 +223,10 @@ export default function HomeSection() {
         {homeData?.homeSections &&
         homeData.homeSections.length > 0 ? (
           homeData.homeSections.map(
-            (service: HomeSectionType, index: number) => {
+            (
+              service: HomeSectionType,
+              index: number
+            ) => {
               const isEven = index % 2 === 0;
 
               return (
@@ -262,7 +257,7 @@ export default function HomeSection() {
                     </div>
                   </div>
 
-                  {/* Image Side */}
+                  {/* Media Side */}
 
                   <div
                     className={`h-[500px] ${
@@ -270,17 +265,37 @@ export default function HomeSection() {
                     }`}
                   >
 
-                    {service.image ? (
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          (
-                            e.currentTarget as HTMLImageElement
-                          ).style.display = "none";
-                        }}
-                      />
+                    {service.media ? (
+                      service.mime.startsWith(
+                        "video"
+                      ) ? (
+                        <video
+                          src={service.media}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (
+                              e.currentTarget as HTMLVideoElement
+                            ).style.display =
+                              "none";
+                          }}
+                        />
+                      ) : (
+                        <img
+                          src={service.media}
+                          alt={service.title}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (
+                              e.currentTarget as HTMLImageElement
+                            ).style.display =
+                              "none";
+                          }}
+                        />
+                      )
                     ) : (
                       <div className="w-full h-full bg-gray-200 animate-pulse" />
                     )}
