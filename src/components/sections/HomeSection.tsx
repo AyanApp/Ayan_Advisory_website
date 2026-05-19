@@ -238,24 +238,32 @@ export default function HomeSection() {
                   {/* Content Side */}
 
                   <div
-                    className={`flex items-center px-8 lg:px-16 py-16 bg-[#f5f5f5] ${
-                      !isEven ? "lg:order-2" : ""
-                    }`}
-                  >
-                    <div>
+  className={`bg-[#f5f5f5] flex flex-col h-[500px] ${
+    !isEven ? "lg:order-2" : ""
+  }`}
+>
 
-                      {service.title && (
-                        <h2 className="text-5xl font-bold leading-tight mb-6">
-                          {service.title}
-                        </h2>
-                      )}
+  {/* FIXED TITLE */}
+  <div className="px-8 lg:px-16 pt-16 pb-6 shrink-0">
 
-                      {renderRichText(
-                        service.description as RichTextBlock[]
-                      )}
+    {service.title && (
+      <h2 className="text-5xl font-bold leading-tight">
+        {service.title}
+      </h2>
+    )}
 
-                    </div>
-                  </div>
+  </div>
+
+  {/* SCROLLABLE DESCRIPTION */}
+  <div className="overflow-y-auto px-8 lg:px-16 pb-16 flex-1">
+
+    {renderRichText(
+      service.description as RichTextBlock[]
+    )}
+
+  </div>
+
+</div>
 
                   {/* Media Side */}
 
