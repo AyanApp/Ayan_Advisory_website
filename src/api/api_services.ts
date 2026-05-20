@@ -8,11 +8,18 @@ export const getHeaderData = async () => {
   const data = json?.data;
 
   return {
-    logo: getMediaUrl(data?.Header_Logo?.url),
-    healthcare: data?.Healthcare?.trim(),
-    laboratory: data?.Laboratory?.trim(),
-    analytics: data?.Analytics?.trim(),
-    contact: data?.Contact?.trim(),
+    logo: getMediaUrl(
+      data?.Ayan_Logo?.formats?.large?.url ||
+      data?.Ayan_Logo?.formats?.medium?.url ||
+      data?.Ayan_Logo?.formats?.small?.url ||
+      data?.Ayan_Logo?.formats?.thumbnail?.url ||
+      data?.Ayan_Logo?.url
+    ),
+
+    button1: data?.button1?.trim(),
+    button2: data?.button2?.trim(),
+    button3: data?.button3?.trim(),
+    button4: data?.button4?.trim(),
   };
 };
 
