@@ -238,32 +238,32 @@ export default function HomeSection() {
                   {/* Content Side */}
 
                   <div
-  className={`bg-[#f5f5f5] flex flex-col h-[500px] ${
-    !isEven ? "lg:order-2" : ""
-  }`}
->
+                    className={`bg-[#f5f5f5] flex flex-col h-[500px] ${
+                      !isEven ? "lg:order-2" : ""
+                    }`}
+                  >
 
-  {/* FIXED TITLE */}
-  <div className="px-8 lg:px-16 pt-16 pb-6 shrink-0">
+                    {/* FIXED TITLE */}
+                    <div className="px-8 lg:px-16 pt-16 pb-6 shrink-0">
 
-    {service.title && (
-      <h2 className="text-5xl font-bold leading-tight">
-        {service.title}
-      </h2>
-    )}
+                      {service.title && (
+                        <h2 className="text-5xl font-bold leading-tight">
+                          {service.title}
+                        </h2>
+                      )}
 
-  </div>
+                    </div>
 
-  {/* SCROLLABLE DESCRIPTION */}
-  <div className="overflow-y-auto px-8 lg:px-16 pb-16 flex-1">
+                    {/* SCROLLABLE DESCRIPTION */}
+                    <div className="overflow-y-auto px-8 lg:px-16 pb-16 flex-1">
 
-    {renderRichText(
-      service.description as RichTextBlock[]
-    )}
+                      {renderRichText(
+                        service.description as RichTextBlock[]
+                      )}
 
-  </div>
+                    </div>
 
-</div>
+                  </div>
 
                   {/* Media Side */}
 
