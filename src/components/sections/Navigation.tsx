@@ -6,32 +6,63 @@ import { getHeaderData } from "../../api/api_services";
 type HeaderData = Awaited<ReturnType<typeof getHeaderData>>;
 
 export default function Navigation() {
-  const [headerData, setHeaderData] = useState<HeaderData | null>(null);
+  const [headerData, setHeaderData] =
+    useState<HeaderData | null>(null);
 
   useEffect(() => {
     getHeaderData()
       .then((data) => setHeaderData(data))
-      .catch((err) => console.error("Failed to fetch header data:", err));
+      .catch((err) =>
+        console.error(
+          "Failed to fetch header data:",
+          err
+        )
+      );
   }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#ffffff] shadow-md px-8 py-4 flex items-center justify-between z-50">
 
+      {/* Logo */}
+
       {headerData?.logo ? (
         <img
           src={headerData.logo}
-          alt="AYAN Healthcare"
+          alt="AYAN Logo"
           className="h-16 w-auto object-contain"
         />
       ) : (
         <div className="h-16 w-36 bg-gray-200 animate-pulse rounded" />
       )}
 
+      {/* Navigation Buttons */}
+
       <div className="hidden md:flex gap-8 font-medium text-gray-700">
-        {headerData?.healthcare && <a href="#">{headerData.healthcare}</a>}
-        {headerData?.laboratory && <a href="#">{headerData.laboratory}</a>}
-        {headerData?.analytics && <a href="#">{headerData.analytics}</a>}
-        {headerData?.contact && <a href="#">{headerData.contact}</a>}
+
+        {headerData?.button1 && (
+          <a href="#">
+            {headerData.button1}
+          </a>
+        )}
+
+        {headerData?.button2 && (
+          <a href="#">
+            {headerData.button2}
+          </a>
+        )}
+
+        {headerData?.button3 && (
+          <a href="#">
+            {headerData.button3}
+          </a>
+        )}
+
+        {headerData?.button4 && (
+          <a href="#">
+            {headerData.button4}
+          </a>
+        )}
+
       </div>
 
     </nav>
