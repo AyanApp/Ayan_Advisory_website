@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getHeaderData } from "../../api/api_services";
+import { Link } from "react-router-dom";
 
 type HeaderData = Awaited<ReturnType<typeof getHeaderData>>;
 
@@ -40,8 +41,15 @@ export default function Navigation() {
       <div className="hidden md:flex gap-8 font-medium text-gray-700">
 
         {headerData?.button1 && (
-          <a href="#">
+          <a
+            href="http://ayantech.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-600 transition"
+          >
+
             {headerData.button1}
+
           </a>
         )}
 
@@ -58,9 +66,14 @@ export default function Navigation() {
         )}
 
         {headerData?.button4 && (
-          <a href="#">
+          <Link
+            to="/contact"
+            className="hover:text-blue-600 transition"
+          >
+
             {headerData.button4}
-          </a>
+
+          </Link>
         )}
 
       </div>
