@@ -1,4 +1,4 @@
-import { apiClient, getMediaUrl } from "./client";
+import { apiClient, getMediaUrl, postClient } from "./client";
 import { ENDPOINTS } from "./endpoints";
 
 // ─── Header ────────────────────────────────────────────────────────────────
@@ -116,12 +116,10 @@ export const getFooterData = async () => {
     mailId: data?.Mail_id?.trim(),
     officeTiming: data?.OfficeTiming?.trim(),
     officeAddress: data?.OfficeAddress?.trim(),
+    indainAddressSubtitle: data?.Indian_Address_SubTitle?.trim(),
     address: data?.Address?.trim(),
+    usAddressSubtitle: data?.US_Address_SubTitle?.trim(),
     usAddress: data?.US_Address?.trim(),
-    requestDemo: data?.RequestDemo?.trim(),
-    description: data?.description?.trim(),
-    requestDemoButton: data?.RequestDemo_Button?.trim(),
-    requestDemoLink: data?.RequestDemo_Link?.trim(),
     copyrights: data?.Ayan_CopyRights?.trim(),
 
     socialLinks:
@@ -131,4 +129,68 @@ export const getFooterData = async () => {
         socialMediaUrl: item?.SocialMedia_url?.trim(),
       })) || [],
   };
+};
+
+// ─── Contact Page ───────────────────────────────────────────────────────
+
+export const getContactPage = async () => {
+  const res = await apiClient(ENDPOINTS.CONTACT_PAGE);
+  const data = res?.data;
+ 
+  if (!data) return null;
+ 
+  const description = data?.description?.[0]?.children?.[0]?.text || "";
+ 
+  const socialLinks =
+    data?.URL?.map((item: any) => ({
+      title: item.title,
+      description: item.description,
+      buttonText: item.buttonText,
+      link: item.Link,
+    })) || [];
+ 
+  const addresses =
+    data?.Address?.map((addr: any) => ({
+      title: addr.title,
+      description: addr.description?.[0]?.children?.[0]?.text || "",
+    })) || [];
+ 
+  const mapImage = data?.location_image?.url
+    ? getMediaUrl(data.location_image.url)
+    : "";
+ 
+  const form = {
+    title: data?.form?.title || "",
+    submitButton: data?.form?.SubmitButtonText || "Submit",
+    successMessage: data?.form?.successMessage || "",
+    fields:
+      data?.form?.formField
+        ?.map((f: any) => ({
+          id: f.id,
+          label: f.label,
+          name: f.name,
+          type: f.type,
+          placeholder: f.placeholder,
+          required: f.required,
+          width: f.width,
+          order: f.order,
+        }))
+        .sort((a: any, b: any) => a.order - b.order) || [],
+  };
+ 
+  return {
+    title: data?.title || "",
+    description,
+    subtitle: data?.subtitle || "",
+    subTitle: data?.sub_title || "",
+    socialLinks,
+    addresses,
+    mapImage,
+    form,
+  };
+};
+ 
+export const submitContactForm = async (formValues: Record<string, string>) => {
+  const res = await postClient(ENDPOINTS.CONTACT_SUBMIT, formValues);
+  return res;
 };
