@@ -116,9 +116,9 @@ export const getFooterData = async () => {
     mailId: data?.Mail_id?.trim(),
     officeTiming: data?.OfficeTiming?.trim(),
     officeAddress: data?.OfficeAddress?.trim(),
-    indainAddressSubtitle: data?.Indian_Address_SubTitle?.trim(),
+    indainAddressSubtitle: data?.Indain_Address_SubTile?.trim(),
     address: data?.Address?.trim(),
-    usAddressSubtitle: data?.US_Address_SubTitle?.trim(),
+    usAddressSubtitle: data?.US_Address_SubTile?.trim(),
     usAddress: data?.US_Address?.trim(),
     copyrights: data?.Ayan_CopyRights?.trim(),
 
