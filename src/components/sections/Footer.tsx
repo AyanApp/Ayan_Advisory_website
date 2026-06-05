@@ -199,7 +199,8 @@ export default function Footer() {
 
           {/* ================= ADDRESS ================= */}
 
-          <div className="flex flex-col justify-start h-full">
+          {/* <div className="flex flex-col justify-start h-full"> */}
+          <div className="flex flex-col justify-start h-full items-center">
 
             <h4 className="font-semibold mb-6 text-sm">
 
