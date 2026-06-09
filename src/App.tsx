@@ -13,6 +13,9 @@ import HomeSection from "./components/sections/HomeSection";
 
 import ContactPage from "./components/pages/contact";
 
+// IMPORT LANDING PAGE
+import ModuleLandingPage from "./components/pages/ModuleLandingPage";
+
 
 function App() {
 
@@ -44,6 +47,13 @@ function App() {
         <Route
           path="/contact"
           element={<ContactPage />}
+        />
+
+        {/* ================= DYNAMIC MODULE LANDING PAGE ================= */}
+
+        <Route
+          path="/module/:slug"
+          element={<ModuleLandingPage />}
         />
 
       </Routes>
